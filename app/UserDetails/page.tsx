@@ -1,4 +1,8 @@
-const UserDetails = () => {
+"use client";
+
+const UserDetails = (props: any) => {
+  const info = props.userDetails;
+
   return (
     <table className="w-1/2 border-2 border-black p-2 text-center">
       <thead className="p-4">
@@ -12,10 +16,14 @@ const UserDetails = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>username</td>
-          <td>age</td>
-        </tr>
+        {info.map((item: any) => {
+          return (
+            <tr key={item.username} className="border-2 border-black p-2">
+              <td className="p-2 border-2 border-black"> {item.username}</td>
+              <td className="p-2 border-2 border-black">{item.age}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
