@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const UserInput = (props: any) => {
   const [enteredUsername, setEnteredUsername] = useState("");
-  const [enteredAge, setEnteredAge] = useState("");
+  const [enteredAge, setEnteredAge] = useState(0);
 
   const inputHandler = (identifier: string, value: any) => {
     
@@ -22,7 +22,7 @@ const UserInput = (props: any) => {
     };
     props.onSaveData(inputData);
     setEnteredUsername("");
-    setEnteredAge("");
+    setEnteredAge(0);
   };
   return (
     <form
@@ -43,7 +43,7 @@ const UserInput = (props: any) => {
         className="border-2 p-2 border-black rounded-md"
         placeholder="age"
         onChange={(event) => inputHandler("age", event.target.value)}
-        value={enteredAge}
+        value={enteredAge||""}
       />
       <button
         className="text-white bg-fuchsia-800 p-2 rounded-md w-fit self-center"

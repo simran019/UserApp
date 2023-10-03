@@ -7,12 +7,10 @@ import { useState } from "react";
 
 export default function Home() {
   const [inputData, setInputData] = useState([]);
-  const saveDataHandler = (inputDetails: any) => {
+  const saveDataHandler = (inputDetails: never) => {
     setInputData((prevState) => {
       return [inputDetails, ...inputData];
     });
-
-    // setInputData([inputDetails,...inputData])
   };
   return (
     <div className="bg-white w-screen flex flex-col items-center h-screen pt-10 gap-6">
