@@ -4,9 +4,10 @@ import { useState } from "react";
 
 const UserInput = (props: any) => {
   const [enteredUsername, setEnteredUsername] = useState("");
-  const [enteredAge, setEnteredAge] = useState(0);
+  const [enteredAge, setEnteredAge] = useState("");
 
   const inputHandler = (identifier: string, value: any) => {
+    
     if (identifier == "username") {
       setEnteredUsername(value);
     } else {
@@ -20,6 +21,8 @@ const UserInput = (props: any) => {
       age: enteredAge,
     };
     props.onSaveData(inputData);
+    setEnteredUsername("");
+    setEnteredAge("");
   };
   return (
     <form
@@ -33,12 +36,14 @@ const UserInput = (props: any) => {
         className="border-2 p-2 border-black rounded-md"
         placeholder="username"
         onChange={(event) => inputHandler("username", event.target.value)}
+        value={enteredUsername}
       />
       <label className="text-white bg-fuchsia-800 p-2 rounded-md">Age</label>
       <input
         className="border-2 p-2 border-black rounded-md"
         placeholder="age"
         onChange={(event) => inputHandler("age", event.target.value)}
+        value={enteredAge}
       />
       <button
         className="text-white bg-fuchsia-800 p-2 rounded-md w-fit self-center"
