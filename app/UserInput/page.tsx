@@ -5,6 +5,7 @@ import { useState } from "react";
 const UserInput = (props: any) => {
   const [enteredUsername, setEnteredUsername] = useState("");
   const [enteredAge, setEnteredAge] = useState(0);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const inputHandler = (identifier: string, value: any) => {
     
@@ -16,13 +17,23 @@ const UserInput = (props: any) => {
   };
   const submitHandler = (event: any) => {
     event.preventDefault();
-    const inputData = {
-      username: enteredUsername,
-      age: enteredAge,
-    };
-    props.onSaveData(inputData);
-    setEnteredUsername("");
-    setEnteredAge(0);
+    if(enteredUsername=="" && enteredAge==0){
+      setErrorMessage("* Enter Details");
+    }else if(enteredAge==0){
+      setErrorMessage("* Enter Age");
+    }else if(enteredUsername==""){
+      setErrorMessage("* Enter Username");
+    }else{
+      setErrorMessage("");
+      const inputData = {
+        username: enteredUsername,
+        age: enteredAge,
+      };
+      
+      props.onSaveData(inputData);
+      setEnteredUsername("");
+      setEnteredAge(0);
+    }
   };
   return (
     <form
@@ -45,6 +56,7 @@ const UserInput = (props: any) => {
         onChange={(event) => inputHandler("age", event.target.value)}
         value={enteredAge||""}
       />
+      <p className="text-red-600 text-center font-bold">{errorMessage}</p>
       <button
         className="text-white bg-fuchsia-800 p-2 rounded-md w-fit self-center"
         type="submit"
